@@ -10,6 +10,7 @@ public class Fruit {
     private String name;
     private int imgno;
     private int price;
+
     final static int imglist[] = {R.drawable.abocado, R.drawable.banana, R.drawable.cherry, R.drawable.cranberry
             , R.drawable.grape, R.drawable.orange, R.drawable.watermelon, R.drawable.kiwi};
     final static int pricelist[] = {10000, 5000, 1000, 4000, 3000, 2000, 8000, 9000};
@@ -44,4 +45,5 @@ public class Fruit {
     public void setPrice(int price) {
         this.price = price;
     }
+
 }

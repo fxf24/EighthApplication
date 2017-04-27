@@ -46,7 +46,7 @@ public class Main2Activity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                addFruit.editData(fruit.get(position).getName(), position);
             }
         });
 
@@ -56,16 +56,17 @@ public class Main2Activity extends AppCompatActivity {
             public void onAdd(String name, int imgno, int price) {
                 Toast.makeText(getApplicationContext(), name+ "추가", Toast.LENGTH_SHORT).show();
                 adapter.addFruit(new Fruit(name,imgno, price));
-                adapter.notifyDataSetChanged();
+            }
+
+            public void onEdit(String name, int imgno, int price, int position){
+                adapter.changeFruit(new Fruit(name,imgno,price), position);
             }
         });
 
         c1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-
-                }
+                adapter.setVisibility(isChecked);
             }
         });
     }

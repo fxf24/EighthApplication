@@ -25,9 +25,15 @@ public class GridItem extends LinearLayout {
         tv2 = (TextView)findViewById(R.id.price);
     }
 
-    public void setData(Fruit one){
+    public void setData(Fruit one, boolean visible){
         tv1.setText(one.getName());
-        tv2.setText(one.getPrice());
+        tv2.setText(String.valueOf(one.getPrice()));
         iv1.setImageResource(one.getImgno());
+        if(visible){
+            tv2.setVisibility(VISIBLE);
+        }
+        else{
+            tv2.setVisibility(GONE);
+        }
     }
 }

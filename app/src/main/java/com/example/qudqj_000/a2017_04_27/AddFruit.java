@@ -19,6 +19,7 @@ public class AddFruit extends LinearLayout implements View.OnClickListener{
     AutoCompleteTextView actv1;
     Button b_next, b_add;
     ImageView img;
+    int position =0;
 
     public AddFruit(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -36,10 +37,24 @@ public class AddFruit extends LinearLayout implements View.OnClickListener{
         b_next.setOnClickListener(this);
     }
 
+    public void setB_add(){
+
+    }
+    public void editData(String s, int position){
+        actv1.setText(s);
+        b_add.setText("M");
+        this.position = position;
+    }
     @Override
     public void onClick(View v) {
         if(v==b_add){
-            onAddListener.onAdd(actv1.getText().toString(), Fruit.imglist[imgno], Fruit.pricelist[imgno]);
+            if(b_add.getText().toString().equals("ADD")) {
+                onAddListener.onAdd(actv1.getText().toString(), Fruit.imglist[imgno], Fruit.pricelist[imgno]);
+            }
+            else{
+                onAddListener.onEdit(actv1.getText().toString(), Fruit.imglist[imgno], Fruit.pricelist[imgno], position);
+                b_add.setText("ADD");
+            }
         }
         else if(v == b_next){
             if(imgno == Fruit.imglist.length -1) imgno = -1;
@@ -49,6 +64,7 @@ public class AddFruit extends LinearLayout implements View.OnClickListener{
 
     interface OnAddListener {
         void onAdd(String name, int imgno, int price);
+        void onEdit(String name, int imgno, int price, int position);
     }
     public OnAddListener onAddListener;
 

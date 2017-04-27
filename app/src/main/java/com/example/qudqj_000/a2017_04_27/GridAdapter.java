@@ -19,6 +19,7 @@ public class GridAdapter extends BaseAdapter {
     Context context;
     ArrayList<Fruit> data = new ArrayList<>();
     ArrayList<String> cart = new ArrayList<>();
+    boolean visible = false;
 
     public GridAdapter(Context context, ArrayList<Fruit> data){
         this.context = context;
@@ -50,16 +51,27 @@ public class GridAdapter extends BaseAdapter {
 //        iv1.setImageResource(data.get(position).getImgno());
         if(convertView == null)
             convertView = new GridItem(context);
-        ((GridItem)convertView).setData(data.get(position));
+        ((GridItem)convertView).setData(data.get(position), visible);
         return convertView;
     }
 
     void addFruit(Fruit fruit){
         data.add(fruit);
+        this.notifyDataSetChanged();
     }
 
     void addToCart(String name){
         cart.add(name);
+    }
+
+    void setVisibility(boolean visible){
+        this.visible = visible;
+        this.notifyDataSetChanged();
+    }
+
+    void changeFruit(Fruit fruit, int position){
+        data.set(position, fruit);
+        this.notifyDataSetChanged();
     }
 
 }
