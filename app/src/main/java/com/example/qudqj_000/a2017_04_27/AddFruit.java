@@ -4,12 +4,17 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import java.util.ArrayList;
+
+//
+//R.drawable.abocado, R.drawable.banana, R.drawable.cherry, R.drawable.cranberry
+//        , R.drawable.grape, R.drawable.orange, R.drawable.watermelon, R.drawable.kiwi};
 /**
  * Created by qudqj_000 on 2017-04-27.
  */
@@ -20,7 +25,8 @@ public class AddFruit extends LinearLayout implements View.OnClickListener{
     Button b_next, b_add;
     ImageView img;
     int position =0;
-
+    static final String[] list = {"abocado", "banana","cherry","cranberry","grape","orange","watermelon","kiwi"};
+    ArrayAdapter<String> autoSearch;
     public AddFruit(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
@@ -35,11 +41,12 @@ public class AddFruit extends LinearLayout implements View.OnClickListener{
 
         b_add.setOnClickListener(this);
         b_next.setOnClickListener(this);
+
+        autoSearch = new ArrayAdapter<String>(context,android.R.layout.simple_dropdown_item_1line,list);
+        actv1.setAdapter(autoSearch);
     }
 
-    public void setB_add(){
 
-    }
     public void editData(String s, int position){
         actv1.setText(s);
         b_add.setText("M");
