@@ -47,19 +47,21 @@ public class AddFruit extends LinearLayout implements View.OnClickListener{
     }
 
 
-    public void editData(String s, int position){
+    public void editData(String s, int position, int index){
         actv1.setText(s);
         b_add.setText("M");
         this.position = position;
+        img.setImageResource(Fruit.imglist[index]);
+        this.imgno = index;
     }
     @Override
     public void onClick(View v) {
         if(v==b_add){
             if(b_add.getText().toString().equals("ADD")) {
-                onAddListener.onAdd(actv1.getText().toString(), Fruit.imglist[imgno], Fruit.pricelist[imgno]);
+                onAddListener.onAdd(actv1.getText().toString(), Fruit.imglist[imgno], Fruit.pricelist[imgno], imgno);
             }
             else{
-                onAddListener.onEdit(actv1.getText().toString(), Fruit.imglist[imgno], Fruit.pricelist[imgno], position);
+                onAddListener.onEdit(actv1.getText().toString(), Fruit.imglist[imgno], Fruit.pricelist[imgno],imgno, position);
                 b_add.setText("ADD");
             }
         }
@@ -70,8 +72,8 @@ public class AddFruit extends LinearLayout implements View.OnClickListener{
     }
 
     interface OnAddListener {
-        void onAdd(String name, int imgno, int price);
-        void onEdit(String name, int imgno, int price, int position);
+        void onAdd(String name, int imgno, int price, int index);
+        void onEdit(String name, int imgno, int price, int index,int position);
     }
     public OnAddListener onAddListener;
 

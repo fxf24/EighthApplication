@@ -31,14 +31,16 @@ public class Main2Activity extends AppCompatActivity {
         program();
     }
     void program(){
+        setTitle("과일 관리");
+
         c1 = (CheckBox)findViewById(R.id.checkbox1);
         b1 = (Button)findViewById(R.id.watchCart);
         gridView = (GridView)findViewById(R.id.grid);
-        fruit.add(new Fruit("아보카도", imglist[0], pricelist[0]));
-        fruit.add(new Fruit("바나나", imglist[1], pricelist[1]));
-        fruit.add(new Fruit("체리", imglist[2], pricelist[2]));
-        fruit.add(new Fruit("크랜베리", imglist[3], pricelist[3]));
-        fruit.add(new Fruit("포도", imglist[4], pricelist[4]));
+        fruit.add(new Fruit("아보카도", imglist[0], pricelist[0],0));
+        fruit.add(new Fruit("바나나", imglist[1], pricelist[1],1));
+        fruit.add(new Fruit("체리", imglist[2], pricelist[2],2));
+        fruit.add(new Fruit("크랜베리", imglist[3], pricelist[3],3));
+        fruit.add(new Fruit("포도", imglist[4], pricelist[4],4));
 
         adapter = new GridAdapter(this, fruit);
         gridView.setAdapter(adapter);
@@ -46,20 +48,20 @@ public class Main2Activity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                addFruit.editData(fruit.get(position).getName(), position);
+                addFruit.editData(fruit.get(position).getName(), position, fruit.get(position).getIndex());
             }
         });
 
         addFruit = (AddFruit)findViewById(R.id.addfruit);
         addFruit.setOnAddListener(new AddFruit.OnAddListener() {
             @Override
-            public void onAdd(String name, int imgno, int price) {
+            public void onAdd(String name, int imgno, int price, int index) {
                 Toast.makeText(getApplicationContext(), name+ "추가", Toast.LENGTH_SHORT).show();
-                adapter.addFruit(new Fruit(name,imgno, price));
+                adapter.addFruit(new Fruit(name,imgno, price, index));
             }
 
-            public void onEdit(String name, int imgno, int price, int position){
-                adapter.changeFruit(new Fruit(name,imgno,price), position);
+            public void onEdit(String name, int imgno, int price, int index,int position){
+                adapter.changeFruit(new Fruit(name,imgno,price, index), position);
             }
         });
 
